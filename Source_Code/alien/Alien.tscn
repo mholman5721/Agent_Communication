@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://alien/Alien.gd" type="Script" id=1]
+[ext_resource path="res://assets/alien/AlienWalk.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Walk"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 41.2707
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 240.0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 30.0
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 40.0
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 80.0
+
+[node name="Alien" type="KinematicBody2D"]
+collision_layer = 0
+script = ExtResource( 1 )
+animSpeed = 2
+moveSpeed = 200
+MASS = 5.0
+ARRIVE_DISTANCE = 15.0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 8
+frame = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Walk = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -1.25172, 1.25172 )
+shape = SubResource( 2 )
+
+[node name="CrystalDetection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrystalDetection"]
+shape = SubResource( 3 )
+
+[node name="CrystalCollision" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrystalCollision"]
+shape = SubResource( 4 )
+
+[node name="DropoffCollision" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DropoffCollision"]
+shape = SubResource( 5 )
+
+[node name="CommunicationDetection" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CommunicationDetection"]
+shape = SubResource( 6 )
+[connection signal="area_entered" from="CrystalDetection" to="." method="_on_CrystalDetection_area_entered"]
+[connection signal="area_entered" from="CrystalCollision" to="." method="_on_CrystalCollision_area_entered"]
+[connection signal="area_entered" from="DropoffCollision" to="." method="_on_DropoffCollision_area_entered"]
+[connection signal="area_entered" from="CommunicationDetection" to="." method="_on_CommunicationDetection_area_entered"]
