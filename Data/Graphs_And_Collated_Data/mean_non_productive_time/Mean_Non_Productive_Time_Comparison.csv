@@ -1,5 +1,5 @@
 ﻿Strategy,# Best,# 2nd,# 3rd,# Worst
-Communication,,,,
-Non-Communication,,,,
-Brute Force Detecting,,,,
-Brute Force Non-Detecting,,,,
+Communication,6.166666667,3,1.666666667,0.166666667
+Non-Communication,2.166666667,5.833333333,3,0
+Brute Force Detecting,2.833333333,2,5.833333333,0.333333333
+Brute Force Non-Detecting,0,0,0.5,10.5
