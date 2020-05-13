@@ -10,11 +10,11 @@ import numpy as np
 # Labels
 xLabel = "Relative Rankings"
 yLabel = "Averages for All Tests"
-saveTitle = "Final_Metrics-Mean_Crystal"
-graphTitle = "Mean Crystals Collected"
+saveTitle = "Final_Metrics-Mean_Non_Productive_Time"
+graphTitle = "Mean Non-Productive Time"
 
 # Read in data
-data_csv = pd.read_csv("Mean_Crystal_Comparison.csv", index_col="Strategy")
+data_csv = pd.read_csv("Mean_Non_Productive_Time_Comparison.csv", index_col="Strategy")
 dataT = data_csv.transpose()
 
 # Create subplot
