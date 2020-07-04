@@ -9,7 +9,7 @@ import numpy as np
 
 # Labels
 xLabel = "Relative Rankings"
-yLabel = "Averages for All Tests"
+yLabel = "Averaged #'s of Rankings Over All Tests"
 saveTitle = "Final_Metrics-Mean_Non_Productive_Time"
 graphTitle = "Mean Non-Productive Time"
 
@@ -21,10 +21,12 @@ dataT = data_csv.transpose()
 fmfig, fm = plt.subplots() # Random Crystals, Random Start
 
 # Plot data
-fm.plot(dataT["Communication"], color="blue", marker="o", label="Communication")
-fm.plot(dataT["Non-Communication"], color="green", marker="*", label="Non-Communication")
-fm.plot(dataT["Brute Force Detecting"], color="orange", marker="+", label="Brute Force Detecting")
-fm.plot(dataT["Brute Force Non-Detecting"], color="red", marker="x", label="Brute Force Non-Detecting")
+index = np.arange(4)
+bar_width = 0.15
+fm.bar(index, dataT["Communication"], bar_width, color="blue", label="Communication")
+fm.bar(index+bar_width, dataT["Non-Communication"], bar_width, color="green", label="Non-Communication")
+fm.bar(index+bar_width*2, dataT["Brute Force Detecting"], bar_width, color="orange", label="Brute Force Detecting")
+fm.bar(index+bar_width*3, dataT["Brute Force Non-Detecting"], bar_width, color="red", label="Brute Force Non-Detecting")
 
 # Change plot size
 box = fm.get_position()
@@ -39,6 +41,8 @@ fm.legend(loc='upper center', bbox_to_anchor=(0.5, -0.18), fancybox=True, shadow
 fm.set_title(graphTitle)
 
 # Set the axis labels
+fm.set_xticks(index + bar_width + bar_width / 2)
+fm.set_xticklabels(["# Best", "# 2nd", "# 3rd", "# Worst"])
 fm.set_xlabel(xLabel)
 fm.set_ylabel(yLabel)
 
